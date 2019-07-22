@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load bootstrap4 %}
+{% load static %}
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    {% bootstrap_css %}
+    <!-- Custom CSS-->
+    <link href="{% static "common/base.css" %}" rel="stylesheet">
+    <!-- Font Awesome Icons-->
+    <script defer src="{% static "vendor/icons/all.js" %}"></script>
+</head>
+
+<body>
+    <!-- NavBar -->
+    <header>
+        <!-- Image and text -->
+        <nav class="navbar navbar-dark bg-dark justify-content-between">
+            <a class="navbar-brand" href="/">
+                <span class="fas fa-camera-retro mr-2"></span>FotoGram
+            </a>
+            <!-- User Logo and Sign In -->
+            {% if user.is_authenticated %}
+            <a class="navbar-brand" href="{% url "user-profile" %}">
+                {{ user.username }}
+                <!-- User Profile Photo-->
+                {% if user.profile.photo %}
+                <img src="{{ MEDIA_URL }}/{{ user.profile.photo }}" class="rounded-circle avatar cropped-profile-img"
+                    alt="profile_picture">
+                {% else %}
+                <span class="fas fa-user-astronaut ml-2"></span>
+                {% endif %}
+            </a>
+            {% else %}
+            <a class="navbar-brand" href="{% url "user-login" %}">
+                Sign In<span class="fas fa-sign-in-alt ml-1"></span>
+            </a>
+            {% endif %}
+        </nav>
+    </header>
+
+    {% block body_content %}CONTENT{% endblock %}
+
+    <!-- Bootstrap JS-->
+    {% bootstrap_javascript jquery="full" %}
+
+</body>
+
+</html>

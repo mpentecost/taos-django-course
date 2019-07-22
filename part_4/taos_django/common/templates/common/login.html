@@ -1,0 +1,26 @@
+{% extends 'common/base.html' %}
+
+{% load bootstrap4 %}
+{% block body_content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <!-- Sign In Form -->
+            <h1 class="h2 mb-3 font-weight-bold text-center">Please Sign In</h1>
+            <form action="{% url "user-login" %}" method="POST" class="form-signin">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Login<span class="fas fa-sign-in-alt ml-1"></span>
+                </button>
+                {% endbuttons %}
+            </form>
+            <!-- Register Link/Icon-->
+            <a class="text-center" href="{% url "user-register" %}">
+                <span class="fas fa-user-plus mr-2"></span>or register an account
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

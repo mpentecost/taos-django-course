@@ -1,0 +1,47 @@
+{% extends 'common/base.html' %}
+
+{% load bootstrap4 %}
+{% block body_content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <!-- Profile Photo -->
+            {% if profile.photo %}
+            <div class="embed-responsive embed-responsive-1by1">
+                <img src="{{ MEDIA_URL }}/{{ profile.photo }}"
+                    class="img-fluid rounded-circle embed-responsive-item cropped-profile-img" alt="profile_picture">
+            </div>
+            <!-- Upload Button-->
+            {% else %}
+            <a class="text-center" href="{% url "user-profile-edit" %}">
+                <span class="fas fa-portrait mr-2"></span>Upload Photo
+            </a>
+            {% endif %}
+        </div>
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <!-- Profile Bio -->
+                    <h1>{{ profile.user.username }}</h1>
+                    <h4>Bio</h4>
+                    <p class="lead">
+                        {{ profile.bio }}
+                    </p>
+                    <hr />
+                    <!-- Profile Edit/Nav -->
+                    {% if editable %}
+                    <nav class="nav flex-column">
+                        <a class="nav-link" href="{% url "user-profile-edit" %}">
+                            <span class="fas fa-edit mr-2"></span>Edit Profile
+                        </a>
+                        <a class="nav-link" href="{% url "user-logout" %}">
+                            <span class="fas fa-door-closed mr-2"></span>Logout
+                        </a>
+                    </nav>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

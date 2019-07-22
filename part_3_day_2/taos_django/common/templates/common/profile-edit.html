@@ -1,0 +1,22 @@
+{% extends 'common/base.html' %}
+
+{% load bootstrap4 %}
+{% block body_content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col col-lg-6">
+            <!-- Profile Edit Form -->
+            <h1 class="h2 mb-3 font-weight-bold text-center">Update Profile</h1>
+            <form enctype="multipart/form-data" action="{% url "user-profile-edit" %}" method="POST" class="form-signin">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% buttons %}
+                <button type="submit" class="btn btn-primary">
+                    Update<span class="fas fa-edit ml-1"></span>
+                </button>
+                {% endbuttons %}
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

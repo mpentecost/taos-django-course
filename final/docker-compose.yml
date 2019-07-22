@@ -1,0 +1,36 @@
+version: '3.7'
+
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_DB=fotogram
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  redis:
+    image: "redis:alpine"
+    command: redis-server --save ''
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - ./taos_django:/app
+    depends_on:
+    - redis
+    - db
+
+  worker:
+    image: fotogram_web
+    command: celery -A config worker -l debug
+    volumes:
+      - ./taos_django:/app
+    depends_on:
+      - redis
+      - db
+
+volumes:
+  postgres_data:

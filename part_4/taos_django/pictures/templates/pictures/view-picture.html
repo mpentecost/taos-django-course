@@ -1,0 +1,76 @@
+{% extends 'common/base.html' %}
+
+{% load bootstrap4 %}
+{% block body_content %}
+<div class="container-fluid">
+    <div class="row justify-content-between mt-3">
+        <div class="col-sm-12 col-md-8 col-lg-8">
+            <!-- Photo Card-->
+            <div class="card">
+                <img class="card-img-top" src="#">
+                <div class="card-body">
+                    <p class="card-text lead">{{ }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-4 col-lg-4">
+            <!-- Comment Nav-->
+            <ul class="nav">
+                <li class="nav-item">
+                    {%  %}
+                    <a class="nav-link text-dark" href="#collapseExample" data-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="collapseExample">
+                        Add Comment<span class="fas fa-plus-circle ml-2"></span>
+                    </a>
+                    {% %}
+                    <a class="nav-link text-dark" href="{% url "user-login" %}">
+                        Add Comment<span class="fas fa-plus-circle ml-2"></span>
+                    </a>
+                    {% %}
+                </li>
+                <!-- Like Icon/Button -->
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="#">
+                        <span class="fas fa-heart mr-2"></span>{{  }}
+                    </a>
+                </li>
+            </ul>
+            <!-- Comment form-->
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <form action="#" method="POST">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        {% buttons %}
+                        <button type="submit" class="btn btn-primary">
+                            Post Comment<span class="fas fa-comments ml-1"></span>
+                        </button>
+                        {% endbuttons %}
+                    </form>
+                </div>
+            </div>
+            <hr />
+            <!-- Comments-->
+            {%  %}
+            <blockquote class="blockquote">
+                <p class="mb-0">{{  }}
+                </p>
+                <footer class="blockquote-footer">
+                    <a class="text-dark" href="#">
+                        {{  }}
+                        <!-- User Profile Photo-->
+                        {%  %}
+                        <img src="#"
+                            class="rounded-circle avatar cropped-profile-img ml-2" alt="profile_picture">
+                        {%  %}
+                        <span class="fas fa-user-astronaut ml-2"></span>
+                        {% endif %}
+                    </a>
+                </footer>
+            </blockquote>
+            <hr />
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

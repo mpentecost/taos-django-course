@@ -1,0 +1,66 @@
+{% extends 'common/base.html' %}
+
+{% load bootstrap4 %}
+{% block body_content %}
+<div class="container-fluid">
+    <!--Post add button-->
+    {% if user.is_authenticated %}
+    <div class="row justify-content-end mt-2">
+        <div class="col-1">
+            <a class="text-dark float-sm-right" href="{% url "picture-post-upload" %}">
+                <span class="fas fa-2x fa-plus-circle"></span>
+            </a>
+        </div>
+    </div>
+    {% endif %}
+    <div class="row">
+        <!-- Photo Cards-->
+        {% for picture_post in picture_posts %}
+        <div class="col-lg-4 col-md-6 col-sm-12 mt-2">
+            <!--Card Photo-->
+            <div class="card bg-dark text-white">
+                <div class="embed-responsive embed-responsive-1by1">
+                    <img class="card-img embed-responsive-item" src="{{ MEDIA_URL }}/{{ picture_post.photo }}">
+                </div>
+                <!-- Card Overlay -->
+                <div class="card-img-overlay">
+                    <div class="row align-items-end">
+                        <div class="col-12">
+                            <ul class="nav justify-content-center post-overlay-text">
+                                <li class="nav-item">
+                                    <!--Profile link-->
+                                    <a class="text-white"
+                                        href="{% url "user-profile-detail" pk=picture_post.user.id %}">
+                                        {{ picture_post.user.username }}
+                                        <!-- User Profile Avatar-->
+                                        {% if picture_post.user.profile.photo %}
+                                        <img src="{{ MEDIA_URL }}/{{ picture_post.user.profile.photo }}"
+                                            class="rounded-circle avatar cropped-profile-img" alt="profile_picture">
+                                        {% else %}
+                                        <span class="fas fa-user-astronaut ml-2"></span>
+                                        {% endif %}
+                                    </a>
+                                </li>
+                                <!-- Comments Icon/Link-->
+                                <li class="nav-item">
+                                    <a class="nav-link text-white" href="#">
+                                        0<span class="fas fa-comments ml-2"></span>
+                                    </a>
+                                </li>
+                                <!-- Like Icon/Button-->
+                                <li class="nav-item">
+                                    <a class="nav-link text-white"
+                                        href="#">
+                                        {{ picture_post.num_likes }}<span class="fas fa-heart ml-2"></span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
