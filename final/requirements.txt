@@ -1,4 +1,4 @@
-Django==2.2.18
+Django==2.2.21
 django-bootstrap4==0.0.8
 factory-boy==2.12.0
 ipython==7.6.1
