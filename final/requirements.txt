@@ -1,7 +1,7 @@
 Django==2.2.18
 django-bootstrap4==0.0.8
 factory-boy==2.12.0
-ipython==7.6.1
+ipython==7.16.3
 celery==4.3.0
 redis==3.2.1
 psycopg2==2.8.3
